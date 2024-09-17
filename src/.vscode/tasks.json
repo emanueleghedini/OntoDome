@@ -1,0 +1,95 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "build_run",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++14",
+                "-Wall",
+                "-O2",
+                // "-shared",
+                "-fopenmp",
+                "-lstdc++fs",
+                "-g",
+                "${workspaceFolder}/test_main.cpp",
+                "-o",
+                "${workspaceFolder}/test_main.app"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "detail": "Builds a runnable version for testing purposes."
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "dependsOn": "build_run",
+            "command": "echo 'DEPLOYING' && chmod +rwx main && ./main.app",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "build_lib",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++14",
+                "-Wall",
+                "-O2",
+                "-shared",
+                "-fopenmp",
+                "-lstdc++fs",
+                "-static-libstdc++",
+                "-c",
+                "-fpic",
+                "-I/usr/include/python3.9",
+                "-g",
+                "${workspaceFolder}/lib_main.cpp",
+                "-o",
+                "${workspaceFolder}/lib_main.o"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "none",
+                "isDefault": false
+            },
+            "detail": "Builds the pybind library version."
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "dependsOn": "build_lib",
+            "command": "echo 'DEPLOYING' && g++ -shared -o libontodome.so main.o",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        }
+    ],
+    "version": "2.0.0"
+}

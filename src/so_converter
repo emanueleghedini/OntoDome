@@ -1,0 +1,3 @@
+#!/bin/bash
+
+g++ -shared -o libontodome.so lib_main.o

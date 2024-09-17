@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/python3.9"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerArgs": [
+                "-O2",
+                "-Wall",
+                "-shared",
+                "-fopenmp",
+                "-lstdc++fs"
+            ],
+            "forcedInclude": [
+                "${default}"
+            ]
+        }
+    ],
+    "version": 4
+}
